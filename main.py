@@ -1,3 +1,8 @@
+'''
+Proxy catcher from https://free-proxy-list.net/
+Maid by Depard42
+'''
+
 import requests
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -6,7 +11,7 @@ import json
 url = "https://free-proxy-list.net/"
 SAVE_NAME = 'proxy.json'
 
-payload = ""
+
 headers = {
     "authority": "free-proxy-list.net",
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -23,7 +28,13 @@ headers = {
     "upgrade-insecure-requests": "1",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.732 YaBrowser/23.11.1.732 Yowser/2.5 Safari/537.36"
 }
-def get_proxy():
+
+
+def get_proxy() -> list:
+    '''
+    return list of dicts with attrs:
+    ip, port, code, country, anonimity, google, https, checked
+    '''
     session = requests.Session()
     session.headers.update(headers)
     response = session.get(url)
